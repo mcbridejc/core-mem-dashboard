@@ -1,0 +1,7 @@
+include svg/svg.min.js
+include svg/svg.min.js.map
+include svg/metadata.json
+include svg/package-info.json
+include README.md
+include LICENSE
+include package.json
