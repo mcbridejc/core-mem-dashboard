@@ -1,0 +1,92 @@
+#diagram {
+    height: 800px;
+    width: auto;
+}
+g.Cores .active {
+    stroke: black;
+    fill: lawngreen;
+}
+
+g.DriveWires .active {
+    stroke-width: 4;
+}
+
+button[data-dash-is-loading="true"]::after{
+    content: " In Progress...";
+    display: inline-block;
+    margin-left: 10px;
+    color: magenta;
+    visibility: visible;
+}
+
+.wrapper {
+    display: grid;
+    align-items: center;
+    grid-gap: 10px;
+    grid-template-columns: repeat(4, [col] 250px ) ;
+    grid-template-rows: repeat(3, [row] auto  );
+    background-color: #fff;
+    color: #444;
+    width: 500px;
+}
+
+#mem-table {
+    border-collapse: collapse;
+}
+#mem-table table,th, td {   
+    border: 1px solid black;
+}
+
+button {
+    font-size: large;
+}
+
+input {
+    font-size: large;
+}
+
+.box {
+    border-radius: 5px;
+    padding: 20px;
+    font-size: 150%;
+}
+
+.diagram-box {
+    grid-column: 1 / span 3;
+    grid-row: 1 / span 3 ;
+}
+
+.mem-table-box {
+    grid-column: 4 / span 1;
+    grid-row: 1;
+}
+
+.write-box  {
+    grid-column: col 4 / span 1;
+    grid-row: 2;
+}
+
+.write-box * {
+    margin-left: 10px;
+}
+
+.read-box {
+    grid-column: col 4 / span 1;
+    grid-row: 3
+}
+
+.pot-box {
+    grid-column: col 1 / span 2;
+    grid-row: 4;
+}
+.sense-delay-box {
+    grid-column: col 3 / span 2;
+    grid-row: 4;
+}
+
+#senseDelayInput, #addrInput, #wrValInput {
+    width: 6em;
+    margin: 1em;
+}
+
+
