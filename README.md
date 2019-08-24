@@ -15,4 +15,8 @@ The svg component can be build and installed by running this in the `svg-compone
 
 ## Running the app
 
-`python app.py`
+`python main.py`
+
+## Notes
+
+I think dash is great, but after trying it out I think it's philosophy is not symphathetic with an embedded device dashboard app. It generally assumes there's no state in the server, so that multiple user sessions can run concurrently, and perhaps even load-balanced amongst back-end instances. You can't run this applicaiton in debug mode, or the hot-reloading will constantly be trying to re-create the FTDI driver. I've made this application work, with the only big compromise being the lack of hot-reloading. However, I don't think there's any mechanism for pushing updates to the client, and in the general embedded device dashboard use-case I need support for events originating from python (e.g. because they originate from the device). 
