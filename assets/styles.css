@@ -1,3 +1,9 @@
+h1 {
+    text-align: center;
+    font-family: courier, monospace;
+    font-weight: normal;
+}
+
 #diagram {
     height: 800px;
     width: auto;
@@ -39,6 +45,7 @@ button[data-dash-is-loading="true"]::after{
 
 button {
     font-size: large;
+    margin-left: 0.5em;
 }
 
 input {
@@ -86,7 +93,7 @@ input {
 
 #senseDelayInput, #addrInput, #wrValInput {
     width: 6em;
-    margin: 1em;
+    margin: 0.5em;
 }
 
 
