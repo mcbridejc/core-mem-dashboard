@@ -18,7 +18,6 @@ from mockdriver import MockCoreMemDriver
 memory_content = [0] * 8
 
 
-
 def svg_data():
     with open('array_diagram.svg') as f:
         data = f.read().splitlines(True)
@@ -80,11 +79,6 @@ def get_class_map(highlight_addr=None):
     return classMap
 
 app = dash.Dash("Core Mem")
-print("Creating CoreMemDriver...")
-spi_driver = CoreMemDriver()
-#spi_driver = MockCoreMemDriver()
-print("Done")
-
 
 app.layout = html.Div([
     html.H1('Magnetic Core Memory Dashboard'),
@@ -140,7 +134,7 @@ app.layout = html.Div([
     html.Div(id='read-signal', style={'display': 'none'}),
     
     #html.Div(id='my-div')
-])
+], id='layout')
 
 @app.callback(
     Output(component_id='diagram', component_property='classMap'),
@@ -150,7 +144,10 @@ app.layout = html.Div([
     ]
 )
 def diagram_update(address, signal):
-    return get_class_map(int(address))
+    try:
+        return get_class_map(int(address))
+    except TypeError:
+        return get_class_map()
 
 @app.callback(
     Output(component_id='writeButton', component_property='value'),
@@ -161,7 +158,7 @@ def diagram_update(address, signal):
     ]
 )
 def writeMemCallback(n_clicks, addr, val):
-    spi_driver.mem_write(addr, val)
+    spi_driver.mem_write(int(addr), int(val))
     return ""
 
 @app.callback(
@@ -227,6 +224,13 @@ def senseDelayChangeCallback(input_value):
         return ""
 
 @app.callback(
+    Output(component_id='writeSenseDelayButton', component_property='value'),
+    [Input(component_id='senseDelayInput', component_property='value')]
+)
+def writeSenseDelay(value):
+    spi_driver.set_sensedelay(int(value))
+
+@app.callback(
     Output(component_id='senseDelayInput', component_property='value'),
     [Input(component_id='readSenseDelayButton', component_property='n_clicks')]
 )
@@ -246,8 +250,8 @@ def readPot(n_clicks):
     vthresh = spi_driver.read_vthresh()
     return vthresh, vdrive
 
-
-
-if __name__ == '__main__':
-    app.run_server(debug=True)
+def run_server(driver):
+    global spi_driver
+    spi_driver = driver
+    app.run_server(debug=False)
 
